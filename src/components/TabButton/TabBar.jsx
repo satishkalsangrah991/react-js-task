@@ -42,7 +42,7 @@ const TabBar = () => {
                 </button>
               ))}
             </div>
-            <div className="py-4">
+            <div className="py-4 my0 textsm">
               {tabs[activeTab].content}
             </div>
           </div>
@@ -97,7 +97,7 @@ const TabBar = () => {
       <Tab tabs={tabs} />
     </div>
 
-    
+
 
 
 
