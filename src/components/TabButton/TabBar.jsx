@@ -96,6 +96,7 @@ const TabBar = () => {
     <div className="container mx-auto mt-4">
       <Tab tabs={tabs} />
     </div>
+    
 
 
   
