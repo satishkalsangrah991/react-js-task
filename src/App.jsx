@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Emi from "./components/EmiCalculater/Emi";
 import MenuScrollNavigationBar from "./components/MenuScrollNavigation/MenuScrollNavigationBar";
@@ -6,17 +7,43 @@ import MultiImageUpload from "./components/MultipleimagesUpload/MultiImageUpload
 import MyCurrencyConvert from "./components/MyCurrencyConvert";
 import QuizApp from "./components/QuizApp/QuizApp";
 import TabBar from "./components/TabButton/TabBar";
+import Throttle from "./components/ThrottleReactjs/Throttle";
 import CurrencyConvertor from "./components/currency-convertor";
 import LikeButton from "./components/likebuttontask/LikeButton";
 import Pagination from "./components/pagination/Pagination";
 import ProgressBar from "./components/progressbar/ProgressBar";
 import TagsInputField from "./components/tagsinputComponets/TagsInputField";
+import TextCopyClipBoard from "./components/CopyTextToreactjs/TextCopyClipBoard";
+import Notes from "./components/Draganddropnotes/Notes";
+import MainInfiniteScroll from "./components/InfiniteScrollTask/MainInfiniteScroll";
+import CountDownTimer from "./components/countdowntimer/CountDownTimer";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
   const checkValue =(c)=>{
 console.log(c)
   }
+
+
+
+
+  const [theme, setTheme] = useState(() => {
+    // Check local storage for theme preference
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? storedTheme : 'light';
+  });
+
+  useEffect(() => {
+    // Update the HTML element with the theme class
+    document.documentElement.className = theme;
+    // Save theme preference to local storage
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
   
     <>
@@ -37,6 +64,10 @@ console.log(c)
   {/* <div>
   <MenuScrollNavigationBar/>
   </div> */}
+
+
+  {/* infinitescrolling */}
+  {/* <MainInfiniteScroll/> */}
 
   
 {/* tab bar */}
@@ -100,6 +131,18 @@ return(
 {/* multipleSearch */}
 {/* <MultiSearchinput/>  */}
 
+
+{/* <Throttle/> */}
+
+{/* text copy clipboard */}
+{/* <TextCopyClipBoard/> */}
+
+{/* Drag and drop notes */}
+{/* <Notes/> */}
+
+{/* countdowntimer  */}
+
+<CountDownTimer/>
 
 
   
