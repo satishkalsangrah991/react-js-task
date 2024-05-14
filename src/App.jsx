@@ -17,6 +17,9 @@ import TextCopyClipBoard from "./components/CopyTextToreactjs/TextCopyClipBoard"
 import Notes from "./components/Draganddropnotes/Notes";
 import MainInfiniteScroll from "./components/InfiniteScrollTask/MainInfiniteScroll";
 import CountDownTimer from "./components/countdowntimer/CountDownTimer";
+import StopWatch from "./components/stopwatch/StopWatch";
+import Autocomplete from "./components/Autocompletetypeboard/Autocomplete";
+import StarRating from "./components/startratingecom/StarRating";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -142,7 +145,17 @@ return(
 
 {/* countdowntimer  */}
 
-<CountDownTimer/>
+{/* <CountDownTimer/> */}
+
+{/* stop watch */}
+{/* <StopWatch/> */}
+
+{/* autocomplete */}
+{/* <Autocomplete /> */}
+
+{/* startrting */}
+
+<StarRating/>
 
 
   
