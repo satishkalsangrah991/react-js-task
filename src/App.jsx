@@ -20,6 +20,9 @@ import CountDownTimer from "./components/countdowntimer/CountDownTimer";
 import StopWatch from "./components/stopwatch/StopWatch";
 import Autocomplete from "./components/Autocompletetypeboard/Autocomplete";
 import StarRating from "./components/startratingecom/StarRating";
+import Memorygame from "./components/memorygame/Memorygame";
+import MultifilterCategory from "./components/categorymultifiter/MultifilterCategory";
+import EsaywayinfinteScroll from "./components/InfiniteScrollTask/EsaywayinfinteScroll";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -71,6 +74,7 @@ console.log(c)
 
   {/* infinitescrolling */}
   {/* <MainInfiniteScroll/> */}
+  {/* <EsaywayinfinteScroll/> */}
 
   
 {/* tab bar */}
@@ -155,7 +159,17 @@ return(
 
 {/* startrting */}
 
-<StarRating/>
+{/* <StarRating/> */}
+
+{/* memory game  */}
+
+{/* <Memorygame/> */}
+
+{/* multifilter */}
+{/* <MultifilterCategory/> */}
+
+
+{/* couter with undo redo */}
 
 
   
