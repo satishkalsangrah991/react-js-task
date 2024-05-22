@@ -23,6 +23,7 @@ import StarRating from "./components/startratingecom/StarRating";
 import Memorygame from "./components/memorygame/Memorygame";
 import MultifilterCategory from "./components/categorymultifiter/MultifilterCategory";
 import EsaywayinfinteScroll from "./components/InfiniteScrollTask/EsaywayinfinteScroll";
+import CouterWithundoRedo from "./components/couterwithundoredo/CouterWithundoRedo";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -171,7 +172,7 @@ return(
 
 {/* couter with undo redo */}
 
-
+<CouterWithundoRedo/>
   
     </>
   );
