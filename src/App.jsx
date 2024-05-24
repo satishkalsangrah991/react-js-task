@@ -24,6 +24,9 @@ import Memorygame from "./components/memorygame/Memorygame";
 import MultifilterCategory from "./components/categorymultifiter/MultifilterCategory";
 import EsaywayinfinteScroll from "./components/InfiniteScrollTask/EsaywayinfinteScroll";
 import CouterWithundoRedo from "./components/couterwithundoredo/CouterWithundoRedo";
+import Carosule from "./components/carousal/Carosule";
+import TodoDragDrop from "./components/todoDraganddrop/TodoDragDrop";
+import SelectebleGrid from "./components/selecteblegrid/SelectebleGrid";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -172,8 +175,16 @@ return(
 
 {/* couter with undo redo */}
 
-<CouterWithundoRedo/>
-  
+{/* <CouterWithundoRedo/> */}
+{/* <Carosule/> */}
+{/* todolistdragDrop */}
+{/* <TodoDragDrop/> */}
+
+{/* selecteble grid */}
+{/* <SelectebleGrid/> */}
+
+{/* modal with carosual */}
+
     </>
   );
 }
