@@ -27,6 +27,9 @@ import CouterWithundoRedo from "./components/couterwithundoredo/CouterWithundoRe
 import Carosule from "./components/carousal/Carosule";
 import TodoDragDrop from "./components/todoDraganddrop/TodoDragDrop";
 import SelectebleGrid from "./components/selecteblegrid/SelectebleGrid";
+import ModalwithCarosual from "./components/modalwithcarosual/ModalwithCarosual";
+import OtpInput from "./components/otpinputFeild/OtpInput";
+import GenrateRandomColor from "./components/genraterandomcolor/GenrateRandomColor";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -184,7 +187,13 @@ return(
 {/* <SelectebleGrid/> */}
 
 {/* modal with carosual */}
+{/* <ModalwithCarosual/> */}
 
+{/* otpinputField */}
+{/* <OtpInput/> */}
+
+{/* genrateRandomColor */}
+{/* <GenrateRandomColor/> */}
     </>
   );
 }
