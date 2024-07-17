@@ -30,6 +30,12 @@ import SelectebleGrid from "./components/selecteblegrid/SelectebleGrid";
 import ModalwithCarosual from "./components/modalwithcarosual/ModalwithCarosual";
 import OtpInput from "./components/otpinputFeild/OtpInput";
 import GenrateRandomColor from "./components/genraterandomcolor/GenrateRandomColor";
+import Practice from "./components/jspractice/Practice";
+import FuturePediaWeb from "./components/futurepediaWeb/FuturePediaWeb";
+import CardSlider from "./components/MenuScrollNavigation/CardSlider";
+import NestedComent from "./components/nestedComments/NestedComent";
+import Optimation from "./components/memozation/Optimation";
+import MainCricle from "./components/rendomcircleprogram/MainCricle";
 const games = ["cricket","footbal","hockey"]
 function App() {
 
@@ -56,6 +62,25 @@ console.log(c)
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
+
+
+
+//  const A = [1,2,3,4,4,4,2,1,1,1,5,5,6,1] 
+
+//   const mostFeq = (a)=>{
+//     let b = {};
+//     a.map((val)=>{
+//       return b[val] ? ++b[val] : b[val] = 1
+//     });
+//    return Object.keys(b).reduce((acc,num)=>{
+//    return b[acc] > b[num] ? acc : num
+//    },0)
+//   };
+  
+//  console.log(mostFeq(A))
+
+
+
 
   return (
   
@@ -156,7 +181,7 @@ return(
 
 {/* countdowntimer  */}
 
-{/* <CountDownTimer/> */}
+<CountDownTimer/>
 
 {/* stop watch */}
 {/* <StopWatch/> */}
@@ -194,6 +219,21 @@ return(
 
 {/* genrateRandomColor */}
 {/* <GenrateRandomColor/> */}
+
+
+{/* cardSlider  */}
+{/* <CardSlider/> */}
+{/* practice */}
+{/* <Practice/> */}
+{/* <FuturePediaWeb/> */}
+
+{/* <NestedComent/> */}
+
+{/* memozition */}
+{/* <Optimation/> */}
+
+{/* cricle program */}
+<MainCricle/>
     </>
   );
 }

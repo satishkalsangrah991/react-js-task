@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import StopWatchCopy from './StopWatchCopy';
 
 const StopWatch = () => {
  const [time, setTime] = useState(0);
@@ -62,7 +63,7 @@ return ()=>clearInterval(time)
   return (
  <>
 
-     <div class="min-wscreen min-h-screen bg-yellow-500 flex items-center  flex-col justify-center px-5 py-5" x-data="beer()" x-init="start()">
+     <div className="min-wscreen min-h-screen bg-yellow-500 flex items-center  flex-col justify-center px-5 py-5" x-data="beer()" x-init="start()">
      <div className='my-5 text-3xl text-gray-800'>
         {formatTime(time)}
      </div>
@@ -88,6 +89,10 @@ return ()=>clearInterval(time)
         className='bg-blue-600 text-white px-6 py-2 rounded-md'>Reset </button>
     </div>
     </div>
+
+    {/* <div>
+      <StopWatchCopy/>
+    </div> */}
 
  </>
   )

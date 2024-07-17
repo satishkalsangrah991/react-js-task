@@ -32,7 +32,7 @@ const MultiSearchinput = () => {
       // fetchUsers();
     const id = setTimeout(()=>{
       fetchUsers();
-    },800)
+    },500)
     return ()=> clearTimeout(id)
     }, [searchTerm]);
 

@@ -26,7 +26,7 @@ const Result = ({userAnswers, questions, resetQuiz = () => {}}) => {
                   ? <span  className='inline-flex bg-green-600 text-white rounded-full mt-3 relative top-1 mx-2'><CgCheck size={20} className=''/></span>
                   : <>
                   <span  className='inline-flex bg-red-600 text-white rounded-full mt-3 relative top-1 mx-2'><RxCross2 size={20} className=''/></span>
-                          <span>Right Ans Is
+                          <span>Right Ans Is =  
                           {question.answerOptions.find((ans) => ans.isCorrect).text}
                               </span></>
                    }

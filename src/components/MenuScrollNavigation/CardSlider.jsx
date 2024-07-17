@@ -1,156 +1,99 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from 'react';
 
-function MenuScrollNavigationBar() {
-  //   const menuRef = useRef(null);
-  //   const [scrollLeft, setScrollLeft] = useState(0);
+const CardSlider = () => {
+    const imageListRef = useRef(null);
+    const prevButtonRef = useRef(null);
+    const nextButtonRef = useRef(null);
+    const scrollbarThumbRef = useRef(null);
+    const scrollbarRef = useRef(null);
 
-  //   const scrollLeftHandler = () => {
-  //     if (menuRef.current) {
-  //       const scrollWidth = menuRef.current.scrollWidth;
-  //       console.log(scrollWidth)
-  //       const scrollLeft = menuRef.current.scrollLeft;
-  //       const offsetWidth = menuRef.current.offsetWidth;
-  //       const newPosition = Math.max(scrollWidth - offsetWidth, scrollLeft - offsetWidth);
-  //       console.log(newPosition)
-  //       setScrollLeft(newPosition);
-  //     }
-  //   };
+    useEffect(() => {
+        const imageList = imageListRef.current;
+        const slideButtons = [prevButtonRef.current, nextButtonRef.current];
+        const sliderScrollbar = scrollbarRef.current;
+        const scrollbarThumb = scrollbarThumbRef.current;
+        const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
-  //   const scrollRightHandler = () => {
-  //     if (menuRef.current) {
-  //       const scrollWidth = menuRef.current.scrollWidth;
-  //       const scrollLeft = menuRef.current.scrollLeft;
-  //       const offsetWidth = menuRef.current.offsetWidth;
-  //       const maxScroll = scrollWidth - offsetWidth;
-  //       const newPosition = Math.min(maxScroll, scrollLeft + offsetWidth);
-  //       console.log(newPosition)
-  //       setScrollLeft(newPosition);
-  //     }
-  //   };
+        const handleMouseDown = (e) => {
+            const startX = e.clientX;
+            const thumbPosition = scrollbarThumb.offsetLeft;
+            const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb.offsetWidth;
 
-  // second code this useRef
+            const handleMouseMove = (e) => {
+                const deltaX = e.clientX - startX;
+                const newThumbPosition = thumbPosition + deltaX;
+                const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+                const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
 
-  //   const menuRef = useRef(null);
+                scrollbarThumb.style.left = `${boundedPosition}px`;
+                imageList.scrollLeft = scrollPosition;
+            }
 
-  //   const scrollLeftHandler = () => {
-  //     console.log( menuRef.current.scrollWidth)
-  //     if (menuRef.current) {
-  //       menuRef.current.scrollBy({ left: -150, behavior: 'smooth' });
-  //     }
-  //   };
+            const handleMouseUp = () => {
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            }
 
-  //   const scrollRightHandler = () => {
-  //     console.log( menuRef.current.scrollLeft)
-  //     if (menuRef.current) {
-  //       menuRef.current.scrollBy({ left: 150, behavior: 'smooth' });
-  //     }
-  //   };
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
 
-  // third way of scroll
+        const handleSlideButtonClick = (direction) => {
+            const scrollAmount = imageList.clientWidth * direction;
+            imageList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
 
-  // const elementRef = useRef(null);
-  // const [arrowDisable, setArrowDisable] = useState(true);
-  // const handleHorizantalScroll = (element, speed, distance, step) => {
-  //   // console.log(element)
-  //   let scrollAmount = 0;
-  //   const slideTimer = setInterval(() => {
-  //     element.scrollLeft += step;
-  //     console.log(step)
-  //     scrollAmount += Math.abs(step);
-  //     if (scrollAmount >= distance) {
-  //       clearInterval(slideTimer);
-  //     }
-  //     // console.log(scrollAmount)
-  //     if (element.scrollLeft === 0) {
-  //       setArrowDisable(true);
-  //     } else {
-  //       setArrowDisable(false);
-  //     }
-  //   }, speed);
+        const handleSlideButtons = () => {
+            slideButtons[0].style.display = imageList.scrollLeft <= 0 ? 'none' : 'flex';
+            slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? 'none' : 'flex';
+        }
 
-  // };
+        const updateScrollThumbPosition = () => {
+            const scrollPosition = imageList.scrollLeft;
+            const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
+            scrollbarThumb.style.left = `${thumbPosition}px`;
+        }
 
-  // handleHorizantalScroll(elementRef.current, 25, 150, -10); left button
-  // handleHorizantalScroll(elementRef.current, 25, 150, 10);  right button
+        scrollbarThumb.addEventListener('mousedown', handleMouseDown);
+        slideButtons.forEach((button, index) => {
+            button.addEventListener('click', () => handleSlideButtonClick(index === 0 ? -1 : 1));
+        });
+        imageList.addEventListener('scroll', () => {
+            updateScrollThumbPosition();
+            handleSlideButtons();
+        });
 
-  // forth way code
-  const menuRef = useRef(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true);
+        handleSlideButtons();  // Initial call to set button visibility
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (menuRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = menuRef.current;
-        //   console.log(scrollLeft, scrollWidth, clientWidth,(scrollLeft + clientWidth+2))
-        setShowLeftButton(scrollLeft > 0);
-        setShowRightButton(scrollLeft + clientWidth + 2 < scrollWidth);
-      }
-    };
+        const handleResize = () => {
+            const newMaxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+            handleSlideButtons();
+            updateScrollThumbPosition();
+        }
 
-    if (menuRef.current) {
-      menuRef.current.addEventListener("scroll", handleScroll);
-    }
+        window.addEventListener('resize', handleResize);
 
-    return () => {
-      if (menuRef.current) {
-        menuRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+        return () => {
+            scrollbarThumb.removeEventListener('mousedown', handleMouseDown);
+            slideButtons.forEach((button, index) => {
+                button.removeEventListener('click', () => handleSlideButtonClick(index === 0 ? -1 : 1));
+            });
+            imageList.removeEventListener('scroll', () => {
+                updateScrollThumbPosition();
+                handleSlideButtons();
+            });
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
-  const scrollLeftHandler = () => {
-    if (menuRef.current) {
-      menuRef.current.scrollBy({ left: -250, behavior: "smooth" });
-    }
-  };
-
-  const scrollRightHandler = () => {
-    if (menuRef.current) {
-      menuRef.current.scrollBy({ left: 250, behavior: "smooth" });
-    }
-  };
-
-  // Auto click scroll buttons every 3 seconds
-  //  useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     // if (showLeftButton) {
-  //       scrollLeftHandler();
-  //     // }
-  //     // else if (showRightButton) {
-  //       scrollRightHandler();
-  //     // }
-  //   }, 1000);
-
-  //   return () => clearInterval(intervalId);
-  // }, [showLeftButton, showRightButton]);
-
-  const autoScroll = true;
-  let slideInterval;
-  let intervalTime = 2000;
-  let auto = () => {
-    slideInterval = setInterval(scrollRightHandler, intervalTime);
-  };
-
-  // useEffect(() => {
-  //   if (autoScroll) {
-  //     auto();
-  //   }
-  //   return () => clearInterval(slideInterval);
-  // }, [ autoScroll]);
-
-  return (
-    <div className="flex flex-col items-center justify-center hscreen mt-10">
-      <div className="overflow-hidden w-full border border-gray-300 rounded relative">
-        <div
-          className="flex overflow-hidden justify-center"
-          ref={menuRef}
-          // style={{ marginLeft: -scrollLeft }}
-        >
-          {/* Your menu items */}
-          {[...Array(24).keys()].map((index) => (
+    return (
+        <div className="container mx-auto">
+            <div className="slider-wrapper relative">
+                <div className="image-list flex overflow-hidden justify-center" ref={imageListRef}>
+                    {/* Your images here */}
+                    {[...Array(12).keys()].map((index) => (
             <div
-              className="product-card-row-two rounded-md w-ful min-w-60 h-[315px] overflow-hidde bg-white border border-transparent hover:border-qpurple transition-all duration-300 ease-in-out m-2 "
+              className="product-card-row-two rounded-md min-w-72 minw-60 h-[315px] overflow-hidde bg-white border border-transparent hover:border-qpurple transition-all duration-300 ease-in-out m-2 "
               style={{ boxShadow: "rgba(0, 0, 0, 0.07) 0px 11px 73px" }}
             >
               <div className="w-full h-[105px] bg-white px-5 ">
@@ -276,103 +219,16 @@ function MenuScrollNavigationBar() {
               </div>
             </div>
           ))}
+          <button id="prev-slide" className="slide-butto mt-4 px-4 py-2 bg-blue-500 text-white rounded absolute left-0 top-32" ref={prevButtonRef} >Prev</button>
+          <button id="next-slide" className="slide-butto mt-4 px-4 py-2 bg-blue-500 text-white rounded absolute right-0 top-32" ref={nextButtonRef}>Next</button>
+                </div>
+
+            </div>
+            <div className="slider-scrollbar" ref={scrollbarRef}>
+                <div className="scrollbar-thumb" ref={scrollbarThumbRef}></div>
+            </div>
         </div>
-      </div>
-      {showLeftButton && (
-        <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded absolute left-0"
-          onClick={scrollLeftHandler}
-        >
-          Left
-        </button>
-      )}
-      {showRightButton && (
-        <button
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded absolute right-0"
-          onClick={scrollRightHandler}
-        >
-          Right
-        </button>
-      )}
-    </div>
-  );
+    );
 }
 
-export default MenuScrollNavigationBar;
-
-// import React, { useEffect, useRef, useState } from 'react';
-
-// function MenuScrollNavigationBar() {
-//   const menuRef = useRef(null);
-//   const [showLeftButton, setShowLeftButton] = useState(false);
-//   const [showRightButton, setShowRightButton] = useState(true);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (menuRef.current) {
-//         const { scrollLeft, scrollWidth, clientWidth } = menuRef.current;
-//         setShowLeftButton(scrollLeft > 0);
-//         setShowRightButton((scrollLeft + clientWidth + 2) < scrollWidth);
-//       }
-//     };
-
-//     if (menuRef.current) {
-//       menuRef.current.addEventListener('scroll', handleScroll);
-//     }
-
-//     return () => {
-//       if (menuRef.current) {
-//         menuRef.current.removeEventListener('scroll', handleScroll);
-//       }
-//     };
-//   }, []);
-
-//   const scrollHandler = (direction) => {
-//     if (menuRef.current) {
-//       const scrollAmount = direction === 'left' ? -250 : 250;
-//       menuRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-//     }
-//   };
-
-//   // Auto scroll every 3 seconds
-//   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//       if (showLeftButton && showRightButton) {
-//         scrollHandler('right');
-//       } else if (showRightButton && showLeftButton) {
-//         scrollHandler('left');
-//       }
-//     }, 1000);
-
-//     return () => clearInterval(intervalId);
-//   }, [showLeftButton, showRightButton]);
-
-//   return (
-//     <div className="flex flex-col items-center justify-center hscreen mt-10">
-//       <div className="overflow-hidden w-full border border-gray-300 rounded">
-//         <div className="flex overflow-hidden" ref={menuRef}>
-//           {[...Array(12).keys()].map((index) => (
-//             <div key={index} className="p-4 bg-gray-200 m-1 rounded truncate min-w-72 min-h-80">
-//               Item {index + 1}
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//       {showLeftButton && <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={() => scrollHandler('left')}>Left</button>}
-//       {showRightButton && <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={() => scrollHandler('right')}>Right</button>}
-//     </div>
-//   );
-// }
-
-// export default MenuScrollNavigationBar;
-
-{
-  /* <div
-// style={{width:'300px'}}
- key={index} className="p-4 bg-gray-200 m-1 rounded truncat min-w-72 min-h80 cursor-pointer w[300px]">
-  Item {index + 1}
-  <br></br>
-To hide the right button when the menu has reached its end, you can compare the sum of the scroll position and the client width with the total scrollable width of the menu. If they are equal or greater, it means the menu has reached its end, and you should hide the right button. Here's how you can modify the code to achieve this:
-
-</div> */
-}
+export default  CardSlider
