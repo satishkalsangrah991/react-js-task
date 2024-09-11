@@ -1,239 +1,55 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Emi from "./components/EmiCalculater/Emi";
-import MenuScrollNavigationBar from "./components/MenuScrollNavigation/MenuScrollNavigationBar";
-import MultiSearchinput from "./components/MultipleSearchInputfeild/MultiSearchinput";
-import MultiImageUpload from "./components/MultipleimagesUpload/MultiImageUpload";
-import MyCurrencyConvert from "./components/MyCurrencyConvert";
-import QuizApp from "./components/QuizApp/QuizApp";
-import TabBar from "./components/TabButton/TabBar";
-import Throttle from "./components/ThrottleReactjs/Throttle";
-import CurrencyConvertor from "./components/currency-convertor";
-import LikeButton from "./components/likebuttontask/LikeButton";
-import Pagination from "./components/pagination/Pagination";
-import ProgressBar from "./components/progressbar/ProgressBar";
-import TagsInputField from "./components/tagsinputComponets/TagsInputField";
-import TextCopyClipBoard from "./components/CopyTextToreactjs/TextCopyClipBoard";
-import Notes from "./components/Draganddropnotes/Notes";
-import MainInfiniteScroll from "./components/InfiniteScrollTask/MainInfiniteScroll";
-import CountDownTimer from "./components/countdowntimer/CountDownTimer";
-import StopWatch from "./components/stopwatch/StopWatch";
-import Autocomplete from "./components/Autocompletetypeboard/Autocomplete";
-import StarRating from "./components/startratingecom/StarRating";
-import Memorygame from "./components/memorygame/Memorygame";
-import MultifilterCategory from "./components/categorymultifiter/MultifilterCategory";
-import EsaywayinfinteScroll from "./components/InfiniteScrollTask/EsaywayinfinteScroll";
-import CouterWithundoRedo from "./components/couterwithundoredo/CouterWithundoRedo";
-import Carosule from "./components/carousal/Carosule";
-import TodoDragDrop from "./components/todoDraganddrop/TodoDragDrop";
-import SelectebleGrid from "./components/selecteblegrid/SelectebleGrid";
-import ModalwithCarosual from "./components/modalwithcarosual/ModalwithCarosual";
-import OtpInput from "./components/otpinputFeild/OtpInput";
-import GenrateRandomColor from "./components/genraterandomcolor/GenrateRandomColor";
-import Practice from "./components/jspractice/Practice";
-import FuturePediaWeb from "./components/futurepediaWeb/FuturePediaWeb";
-import CardSlider from "./components/MenuScrollNavigation/CardSlider";
-import NestedComent from "./components/nestedComments/NestedComent";
-import Optimation from "./components/memozation/Optimation";
-import MainCricle from "./components/rendomcircleprogram/MainCricle";
-const games = ["cricket","footbal","hockey"]
+
+import Card from "./components/card/Card";
+import MainFile from "./components/card/MainFile";
+
+import ToolkitPagination from "./components/paginationwithtoolkit/ToolkitPagination";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UserForm from "./components/useform/UserForm";
+import UserList from "./components/useform/UserList";
+import UserManagement from "./components/useform/UserManagement";
+import CardAllproduct from "./components/shopingcardwithToolkit/CardAllproduct";
+import toast, { Toaster } from 'react-hot-toast';
+import AllCardViewpage from "./components/shopingcardwithToolkit/AllCardViewpage";
+import AllProduct from "./components/allproductwithfilter/AllProduct";
+import AlubmIdPage from "./components/googlephotosalum/AlubmIdPage";
+import PhotoGallary from "./components/googlephotosalum/PhotoGallary";
+import LoadMoreData from "./components/infinitescrollingpagination/LoadMoreData";
+import ScrollingPagination from "./components/infinitescrollingpagination/ScrollingPagination";
+import MoneyCount from "./components/bankmoneycount/MoneyCount";
 function App() {
-
-  const checkValue =(c)=>{
-console.log(c)
-  }
-
-
-
-
-  const [theme, setTheme] = useState(() => {
-    // Check local storage for theme preference
-    const storedTheme = localStorage.getItem('theme');
-    return storedTheme ? storedTheme : 'light';
-  });
-
-  useEffect(() => {
-    // Update the HTML element with the theme class
-    document.documentElement.className = theme;
-    // Save theme preference to local storage
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-
-
-//  const A = [1,2,3,4,4,4,2,1,1,1,5,5,6,1] 
-
-//   const mostFeq = (a)=>{
-//     let b = {};
-//     a.map((val)=>{
-//       return b[val] ? ++b[val] : b[val] = 1
-//     });
-//    return Object.keys(b).reduce((acc,num)=>{
-//    return b[acc] > b[num] ? acc : num
-//    },0)
-//   };
-  
-//  console.log(mostFeq(A))
-
-
 
 
   return (
   
     <>
-    {/* currency converter */}
-
-   {/* <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-       <div className="container">
-         <CurrencyConvertor />
-         <MyCurrencyConvert/>
-       </div>
-  
-
-   
-
-     </div> */}
-
-{/* menu scrollbar */}
-  {/* <div>
-  <MenuScrollNavigationBar/>
-  </div> */}
-
-
-  {/* infinitescrolling */}
-  {/* <MainInfiniteScroll/> */}
-  {/* <EsaywayinfinteScroll/> */}
-
-  
-{/* tab bar */}
-
-
-  {/* <div>
-    <TabBar/>
-  </div> */}
-
-     {/* progressbar  */}
-       {/* <ProgressBar/> */}
-
-       {/* like button */}
-       {/* <LikeButton/> */}
-
-
-
-    {/* <div className="flex justify-center">
-  {
-    games.map((val,index)=>{
-return(
-  <>
-  <div key={index}>
-    <input 
-    type="radio"
-     className="w-5 h-4 mx-2" 
-    id="huey" 
-    name="drone" 
-     value={val} 
-     onClick={()=>checkValue(val)}
-
-     />
-    <label htmlFor={val}>{val}</label>
-  </div>
-  </>
-)
-    })
-  }
-    </div> */}
 
  
-      {/*EMI Calculater  */}
+  {/* <Card/> */}
+  {/* <MainFile/> */}
+{/* <Pagination/> */}
 
-      {/* <Emi/> */}
-
-
-      {/* quiz App */}
-      {/* <QuizApp/> */}
-
-{/* pagination  simple*/}
-      {/* <Pagination/> */}
-
-      {/* tags input componets */}
-      {/* <TagsInputField/> */}
-
-      {/* multiple images */}
-
-      {/* <MultiImageUpload/> */}
-
-
-{/* multipleSearch */}
-{/* <MultiSearchinput/>  */}
-
-
-{/* <Throttle/> */}
-
-{/* text copy clipboard */}
-{/* <TextCopyClipBoard/> */}
-
-{/* Drag and drop notes */}
-{/* <Notes/> */}
-
-{/* countdowntimer  */}
-
-<CountDownTimer/>
-
-{/* stop watch */}
-{/* <StopWatch/> */}
-
-{/* autocomplete */}
-{/* <Autocomplete /> */}
-
-{/* startrting */}
-
-{/* <StarRating/> */}
-
-{/* memory game  */}
-
-{/* <Memorygame/> */}
-
-{/* multifilter */}
-{/* <MultifilterCategory/> */}
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<ToolkitPagination/>}/>
+    <Route path="/card" element={<CardAllproduct/>}/>
+    <Route path="/card/view" element={<AllCardViewpage/>}/>
+    <Route path="/user/list" element={<UserManagement/>}/>
+    <Route path="/user/add" element={<UserForm/>}/>
+    <Route path="/all/product" element={<AllProduct/>}/>
+    <Route path="/allphoto" element={<PhotoGallary/>}/>
+    <Route path="/allphoto/:id" element={<AlubmIdPage/>}/>
+    <Route path="/allload/data" element={<LoadMoreData/>}/>
+    <Route path="/infinitescroll/data" element={<ScrollingPagination/>}/>
+    <Route path="/money/count" element={<MoneyCount/>}/>
+    {/* <Route path="/user/list" element={<UserList/>}/> */}
+  </Routes>
+  <Toaster />
+</BrowserRouter>
 
 
-{/* couter with undo redo */}
 
-{/* <CouterWithundoRedo/> */}
-{/* <Carosule/> */}
-{/* todolistdragDrop */}
-{/* <TodoDragDrop/> */}
-
-{/* selecteble grid */}
-{/* <SelectebleGrid/> */}
-
-{/* modal with carosual */}
-{/* <ModalwithCarosual/> */}
-
-{/* otpinputField */}
-{/* <OtpInput/> */}
-
-{/* genrateRandomColor */}
-{/* <GenrateRandomColor/> */}
-
-
-{/* cardSlider  */}
-{/* <CardSlider/> */}
-{/* practice */}
-{/* <Practice/> */}
-{/* <FuturePediaWeb/> */}
-
-{/* <NestedComent/> */}
-
-{/* memozition */}
-{/* <Optimation/> */}
-
-{/* cricle program */}
-<MainCricle/>
     </>
   );
 }
